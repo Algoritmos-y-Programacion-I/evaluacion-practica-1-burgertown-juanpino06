@@ -2,7 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
-public class BurgerTown {
+public class BurgerTownParcial {
 
     public static Scanner reader;
     public static double[] precios;
@@ -55,7 +55,7 @@ public class BurgerTown {
                     solicitarDatos();
                     break;
                 case 2:
-                    System.out.println("\nLa cantidad total de platos vendidos en el dia fue de: "+calcularTotalPlatosVendidos());
+                    System.out.println("\nLa cantidad total de platos vendidos en el dia fue de: "+ calcularTotalPlatosVendidos());
                     break;
                 case 3:
                     System.out.println("\nEl precio promedio de los platos vendidos en el dia fue de: "+calcularPrecioPromedio());
@@ -100,32 +100,104 @@ public class BurgerTown {
 
     }
 
+    /**
+     * Descripcion: Este metodo se encarga de solicitar al usuario el precio del plato que desea y ademas cuantos
+     * de esos mimos platos desea
+     * pre: El Scanner reader debe estar inicializado
+     * pre: Los arreglos precios y unidades deben estar declarados
+     * pos: Los arreglos precios y unidades quedan inicializados
+     */
+
     public static void solicitarDatos(){
+        
+        for (int i = 0; i < precios.length; i++) {
+
+            System.out.println("Digite el precio del plato que desea "+(i+1));
+            System.out.println("Digite la cantidad de platos que desea "+(i+1));
+            
+            precios[i] = reader.nextDouble();
+            unidades[i] = reader.nextInt();
+            
+        }
+    }
 
      
-    }
+    /**
+     * Descripcion:Este metodo se encarga de calcular el total de unidades vendidas en el dia, esto se
+     * logra recorriendo el arreglo unidades y sumando los valores de cada uno
+     * pre: el arreglo unidades debe estar inicializado
+     * pre: el arreglo no puede estar vacio 
+     */
+
 
     public static int calcularTotalPlatosVendidos(){
 
-        return 0;
+        int tot = 0;
+        for (int i = 0; i < unidades.length; i++){
+            tot += unidades[i];
+        }
 
+        return tot; 
     }
+
+   /**
+     * Descripcion: El metodo debe calcular el precio promedio de los precios de los platos vendidos en el dia 
+     * recorriendo el arreglo precios y sumando cada uno de los espacios y sus valores, luego sumando el total 
+     * con la cantidad de espacios
+     * pre: El arreglo precios debe estar inicializado
+     * pre: el arreglo no puede estar vacio
+     */
 
     public static double calcularPrecioPromedio(){
 
-        return 0;
+        double promedio = 0.0;
+        int sum = 0;
 
+        for (int i = 0; i < precios.length; i++){
+
+            sum+=precios[i];
+
+            promedio = sum/precios.length;
+
+        }
+
+        return promedio;
     }
+
+/**
+     * Descripcion: Este metodo se encarga de calcular las ventas totales en el dia
+     * pre: El Scanner reader debe estar inicializado
+     * pre: Los arreglos precios y unidades deben estar declarados
+     * pos: Los arreglos precios y unidades quedan inicializados
+     */
 
     public static double calcularVentasTotales(){
 
-        return 0;
+        double ventas_Tot = 0;
+
+        for (int i = 0; i < unidades.length; i++){
+
+            ventas_Tot += unidades[i]*precios[i];
+
+        }
+
+        return ventas_Tot;
 
     }
 
+
     public static int consultarPlatosSobreLimite(double limite){
 
-        return 0;
+        int contador = 0;
+
+        for (int i = 0; i < precios.length;i++){
+
+            if ((precios[i]*unidades[i])>limite){
+                contador++;
+            }
+        }
+
+        return contador;
 
     }
 
